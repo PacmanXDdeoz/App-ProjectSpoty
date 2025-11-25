@@ -14,6 +14,18 @@ CREATE TABLE musica.generos(
     gender TEXT
 );
 
+INSERT INTO musica.generos(gender) VALUES 
+('Pop'),
+('Rock'),
+('Reggueton'),
+('Hip Hop'),
+('Electronica'),
+('Clasica'),
+('Jazz'),
+('Blues'),
+('Reggae'),
+('Metal');
+
 CREATE TABLE musica.artistas(
     artist_id INT PRIMARY KEY,
     name_artist TEXT,
