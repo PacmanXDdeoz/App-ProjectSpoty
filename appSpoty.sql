@@ -34,6 +34,17 @@ CREATE TABLE musica.artistas(
     type_artist TEXT NOT NULL
 );
 
+INSERT INTO musica.artistas(name_artist, name_real, country, type_artist) VALUES 
+('The Beatles', 'The Beatles', 'UK', 'Rock'),
+('Queen', 'Fredy Mercury', 'UK', 'Rock'),
+('Elvis Presley', 'Elvis Presley', 'USA', 'Rock'),
+('Michael Jackson', 'Michael Jackson', 'USA', 'Rock'),
+('Madonna', 'Madonna', 'USA', 'Rock'),
+('Beyonce', 'Beyonce', 'USA', 'Rock'),
+('Shakira', 'Shakira', 'USA', 'Rock'),
+('Lady Gaga', 'Lady Gaga', 'USA', 'Rock');
+
+
 CREATE TABLE musica.albumes (
     album_id INT PRIMARY KEY,
     title TEXT NOT NULL,
@@ -41,6 +52,16 @@ CREATE TABLE musica.albumes (
     count_songs INT,
     artist_id INT REFERENCES musica.artistas(artist_id)
 );
+
+INSERT INTO musica.albumes(title, date_release, count_songs, artist_id) VALUES 
+('The Beatles', '1962', 7, 1),
+('Queen', '1981', 10, 2),
+('Elvis Presley', '1956', 9, 3),
+('Michael Jackson', '1957', 9, 4),
+('Madonna', '1987', 9, 5),
+('Beyonce', '2011', 9, 6),
+('Shakira', '1994', 9, 7),
+('Lady Gaga', '2009', 9, 8);
 
 CREATE TABLE musica.playlist(
     playlist_id INT PRIMARY KEY,
