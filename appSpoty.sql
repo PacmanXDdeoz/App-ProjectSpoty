@@ -3,14 +3,18 @@ CREATE DATABASE db_spoty;
 CREATE SCHEMA musica;
 
 CREATE TABLE musica.usuarios(
-    user_id INT PRIMARY KEY,
+    user_id INT SERIAL PRIMARY KEY,
     user_name TEXT NOT NULL,
     email TEXT NOT NULL,
     password TEXT NOT NULL
 );
 
+INSERT INTO musica.usuarios(user_name, email, password) VALUES 
+('Manesco7152', 'manesco7152@gmail.com', '123456'),
+('Pacmanxddeoz', 'pacmanxddeoz@gmail.com', '123456');
+
 CREATE TABLE musica.generos(
-    gender_id INT PRIMARY KEY,
+    gender_id SERIAL PRIMARY KEY,
     gender TEXT
 );
 
@@ -27,7 +31,7 @@ INSERT INTO musica.generos(gender) VALUES
 ('Metal');
 
 CREATE TABLE musica.artistas(
-    artist_id INT PRIMARY KEY,
+    artist_id SERIAL PRIMARY KEY,
     name_artist TEXT,
     name_real TEXT NOT NULL,
     country TEXT,
@@ -35,18 +39,20 @@ CREATE TABLE musica.artistas(
 );
 
 INSERT INTO musica.artistas(name_artist, name_real, country, type_artist) VALUES 
-('The Beatles', 'The Beatles', 'UK', 'Rock'),
-('Queen', 'Fredy Mercury', 'UK', 'Rock'),
-('Elvis Presley', 'Elvis Presley', 'USA', 'Rock'),
-('Michael Jackson', 'Michael Jackson', 'USA', 'Rock'),
-('Madonna', 'Madonna', 'USA', 'Rock'),
-('Beyonce', 'Beyonce', 'USA', 'Rock'),
-('Shakira', 'Shakira', 'USA', 'Rock'),
-('Lady Gaga', 'Lady Gaga', 'USA', 'Rock');
+('Michael Jackson', 'Michael Jackson', 'USA', 'Solista'),
+('Alan Walker', 'Alan Walker', 'USA', 'Solista'),
+('Bad Bunny', 'Benito Antonio Martinez Ocasio', 'Puerto Rico', 'Solista'),
+('Imagine Dragons', 'Dan Reynolds, Wayne Sermon, Ben McKee, Daniel Platzman', 'USA', 'Banda'),
+('Shakira', 'Shakira Isabel Mebarak Ripoll', 'Colombia', 'Solista'),
+('Coldplay', 'Chris Martin, Jonny Buckland, Guy Berryman, Will Champion', 'Reino Unido', 'Banda'),
+('BTS', 'Kim Nam-joon, Kim Seok-jin, Min Yoon-gi, Jung Ho-seok, Park Ji-min, Kim Tae-hyung, Jeon Jung-kook', 'Corea del Sur', 'Grupo'),
+('Queen', 'Freddie Mercury, Brian May, Roger Taylor, John Deacon', 'Reino Unido', 'Banda'),
+('Metallica', 'James Hetfield, Lars Ulrich, Kirk Hammett, Robert Trujillo', 'USA', 'Banda'),
+('The Weeknd', 'Abel Makkonen Tesfaye', 'Canadá', 'Solista');
 
 
 CREATE TABLE musica.albumes (
-    album_id INT PRIMARY KEY,
+    album_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     date_release TEXT NOT NULL,
     count_songs INT,
@@ -54,49 +60,85 @@ CREATE TABLE musica.albumes (
 );
 
 INSERT INTO musica.albumes(title, date_release, count_songs, artist_id) VALUES 
-('The Beatles', '1962', 7, 1),
-('Queen', '1981', 10, 2),
-('Elvis Presley', '1956', 9, 3),
-('Michael Jackson', '1957', 9, 4),
-('Madonna', '1987', 9, 5),
-('Beyonce', '2011', 9, 6),
-('Shakira', '1994', 9, 7),
-('Lady Gaga', '2009', 9, 8);
+('Thriller', '1982-11-30', 9, 1),
+('Different World', '2018-12-14', 15, 2),
+('YHLQMDLG', '2020-02-29', 20, 3),
+('Night Visions', '2012-09-04', 12, 4),
+('Fijación Oral Vol. 1', '2005-06-03', 12, 5),
+('A Head Full of Dreams', '2015-12-04', 11, 6),
+('Map of the Soul: 7', '2020-02-21', 20, 7),
+('A Night at the Opera', '1975-11-21', 12, 8),
+('Master of Puppets', '1986-03-03', 8, 9),
+('After Hours', '2020-03-20', 14, 10);
 
 CREATE TABLE musica.playlist(
-    playlist_id INT PRIMARY KEY,
+    playlist_id SERIAL PRIMARY KEY,
     name_playlist TEXT NOT NULL,
     description TEXT NOT NULL,
-    date_create DATE,
+    date_create DATE NOT NULL,
     user_id INT REFERENCES musica.usuarios(user_id)
 );
 
 CREATE TABLE musica.colaboraciones(
     artist_id INT REFERENCES musica.artistas(artist_id),
-    song_id INT REFERENCES musica.canciones(song_id),
+    song_id INT REFERENCES musica.canciones(song_id)
 );
 
+INSERT into musica.colaboraciones(artist_id, song_id) VALUES 
+(2, 1),
+(3, 2),
+(4, 3),
+(5, 4),
+(6, 5),
+(7, 6),
+(8, 7),
+(1, 8);
+
 CREATE TABLE musica.lyrics(
-    lyrics_id INT PRIMARY KEY,
+    lyrics_id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     lenguage TEXT NOT NULL,
     version TEXT NOT NULL
 );
 
+INSERT INTO musica.lyrics(content, lenguage, version) VALUES 
+('Cause this is thriller, thriller night...', 'English', 'Original'),
+('We live, we love, we lie...', 'English', 'Original'),
+('Yo perreo sola, sin que me estén molestando...', 'Español', 'Original'),
+('Im waking up, I feel it in my bones...', 'English', 'Original'),
+('Sigo aqui, queriéndote en silencio...', 'Español', 'Acoustic'),
+('A sky full of stars, you light up the path...', 'English', 'Original'),
+('I wanna know your name, and I wanna know your heart...', 'Korean/English', 'Original'),
+('Is this the real life? Is this just fantasy?', 'English', 'Original'),
+('Taste me you will see, more is all you need...', 'English', 'Original'),
+('I can’t escape this now, unless you show me how...', 'English', 'Remix');
+
 CREATE TABLE musica.playlist_songs(
-    playlist_song_id INT PRIMARY KEY,
+    playlist_song_id SERIAL PRIMARY KEY,
     playlist_id INT REFERENCES musica.playlist(playlist_id),
     song_id INT REFERENCES musica.canciones(song_id)
 );
 
+INSERT INTO musica.playlist_songs(playlist_id, song_id) VALUES 
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8);
+
 CREATE TABLE musica.canciones(
-    song_id INT PRIMARY KEY,
+    song_id SERIAL PRIMARY KEY,
     song_name TEXT NOT NULL,
     duration INT NOT NULL,
-    date_creation DATE,
+    date_creation DATE NOT NULL,
     reproduction INT NOT NULL,
     lyrics_id INT REFERENCES musica.lyrics(lyrics_id),
     gender_id INT REFERENCES musica.generos(gender_id),
     artist_id INT REFERENCES musica.artistas(artist_id),
     album_id INT REFERENCES musica.albumes(album_id)
 );
+
+INSERT INTO musica.canciones(song_name, duration, date_creation, reproduction, lyrics_id, gender_id, artist_id, album_id) VALUES 
