@@ -101,7 +101,6 @@ CREATE TABLE musica.lyrics(
     version TEXT NOT NULL
 );
 
-INSERT INTO musica.lyrics(content, lenguage, version) VALUES 
 ('Cause this is thriller, thriller night...', 'English', 'Original'),
 ('We live, we love, we lie...', 'English', 'Original'),
 ('Yo perreo sola, sin que me estén molestando...', 'Español', 'Original'),
@@ -112,6 +111,18 @@ INSERT INTO musica.lyrics(content, lenguage, version) VALUES
 ('Is this the real life? Is this just fantasy?', 'English', 'Original'),
 ('Taste me you will see, more is all you need...', 'English', 'Original'),
 ('I can’t escape this now, unless you show me how...', 'English', 'Remix');
+
+INSERT INTO musica.lyrics(content, lenguage, version) VALUES 
+('Billie Jean is not my lover, she''s just a girl who claims that I am the one...', 'English', 'Original'),
+('Where are you now? Was it all in my fantasy?...', 'English', 'Original'),
+('Si tu novio no te mama el culo, pa’ eso que no mame...', 'Español', 'Explicit'),
+('When you feel my heat, look into my eyes, it''s where my demons hide...', 'English', 'Acoustic'),
+('Ay amor, me duele tanto, me duele tanto...', 'Español', 'Original'),
+('Oh angel sent from up above, you know you make my world light up...', 'English', 'Original'),
+('Do your thang, do your thang with me now...', 'Korean/English', 'Original'),
+('Love of my life, you’ve hurt me, you’ve broken my heart...', 'English', 'Live'),
+('Lashing out the action, returning the reaction...', 'English', 'Original'),
+('I saw you dancing in a crowded room, you looked so happy...', 'English', 'Original');
 
 CREATE TABLE musica.playlist_songs(
     playlist_song_id SERIAL PRIMARY KEY,
