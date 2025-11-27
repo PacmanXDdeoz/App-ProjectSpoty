@@ -98,18 +98,22 @@ public class ConsultaAlbumes {
     }
 
     /**
-     * Busca álbumes por artista (búsqueda por artist_id).
+     * Busca álbumes por nombre de artista (búsqueda parcial, case-insensitive).
+     * Realiza JOIN con `musica.artistas` y filtra por `name_artist`.
      */
-    public static List<Map<String, Object>> buscarxArtista(Connection connection, int artistId) {
+    public static List<Map<String, Object>> buscarxArtista(Connection connection, String artistName) {
         ResultSet rs = null;
         PreparedStatement ps = null;
         List<Map<String, Object>> lista = new ArrayList<>();
 
         try {
             connection = Con.getConn();
-            String sql = "SELECT album_id, title, date_release, count_songs, artist_id FROM musica.albumes WHERE artist_id = ? ORDER BY album_id";
+            String sql = "SELECT al.album_id, al.title, al.date_release, al.count_songs, al.artist_id, ar.name_artist " +
+                            "FROM musica.albumes al " +
+                            "INNER JOIN musica.artistas ar ON al.artist_id = ar.artist_id " +
+                            "WHERE LOWER(ar.name_artist) LIKE LOWER(?) ORDER BY al.album_id";
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, artistId);
+            ps.setString(1, "%" + artistName + "%");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -119,6 +123,7 @@ public class ConsultaAlbumes {
                 album.put("date_release", rs.getString("date_release"));
                 album.put("count_songs", rs.getInt("count_songs"));
                 album.put("artist_id", rs.getInt("artist_id"));
+                album.put("artist_name", rs.getString("name_artist"));
                 lista.add(album);
             }
 
