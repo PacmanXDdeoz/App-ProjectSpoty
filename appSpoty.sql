@@ -69,7 +69,17 @@ INSERT INTO musica.albumes(title, date_release, count_songs, artist_id) VALUES
 ('Map of the Soul: 7', '2020-02-21', 20, 7),
 ('A Night at the Opera', '1975-11-21', 12, 8),
 ('Master of Puppets', '1986-03-03', 8, 9),
-('After Hours', '2020-03-20', 14, 10);
+('After Hours', '2020-03-20', 14, 10),
+('Billie Jean', '1982-10-01', 9, 1),
+('Faded', '2015-12-03', 10, 2),
+('Safaera', '2020-02-29', 20, 3),
+('Radioactive', '2012-09-04', 12, 4),
+('La Tortura', '2005-06-03', 12, 5),
+('Hymn for the Weekend', '2015-12-04', 11, 6),
+('Black Swan', '2020-02-21', 20, 7),
+('Love of My Life', '1975-11-21', 12, 8),
+('Battery', '1986-03-03', 8, 9),
+('Save Your Tears', '2020-03-20', 14, 10);
 
 CREATE TABLE musica.playlist(
     playlist_id SERIAL PRIMARY KEY,
@@ -79,6 +89,13 @@ CREATE TABLE musica.playlist(
     user_id INT REFERENCES musica.usuarios(user_id)
 );
 
+INSERT INTO musica.playlist(name_playlist, description, date_create, user_id) VALUES
+('Favoritas de Manesco', 'Playlist con las canciones favoritas del usuario.', '2024-05-10', 1),
+('Electro Hits', 'Música electrónica y EDM seleccionada por el usuario.', '2024-06-01', 1),
+
+('Fiesta Total', 'Playlist llena de canciones para ambientar cualquier fiesta.', '2024-07-15', 2),
+('Clásicos Eternos', 'Canciones clásicas del rock y pop de todos los tiempos.', '2024-08-20', 2);
+
 CREATE TABLE musica.colaboraciones(
     artist_id INT REFERENCES musica.artistas(artist_id),
     song_id INT REFERENCES musica.canciones(song_id)
@@ -86,13 +103,25 @@ CREATE TABLE musica.colaboraciones(
 
 INSERT into musica.colaboraciones(artist_id, song_id) VALUES 
 (2, 1),
-(3, 2),
+(1, 2),
 (4, 3),
-(5, 4),
+(3, 4),
 (6, 5),
-(7, 6),
-(8, 7),
-(1, 8);
+(5, 6),
+(10, 7),
+(4, 8),
+(8, 9),
+(7, 10),
+(2, 11),
+(1, 12),
+(4, 13),
+(3, 14),
+(6, 15),
+(5, 16),
+(10, 17),
+(4, 18),
+(8, 19),
+(7, 20);
 
 CREATE TABLE musica.lyrics(
     lyrics_id SERIAL PRIMARY KEY,
@@ -130,14 +159,33 @@ CREATE TABLE musica.playlist_songs(
 );
 
 INSERT INTO musica.playlist_songs(playlist_id, song_id) VALUES 
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7),
-(1, 8);
+-- 1. Favoritas de Manesco
+(1, 1),     -- Thriller
+(1, 4),     -- Demons
+(1, 6),     -- A Sky Full of Stars
+(1, 10),    -- Blinding Lights
+(1, 12),    -- Faded
+
+-- 2. Electro Hits
+(2, 2),     -- The Spectre
+(2, 6),     -- A Sky Full of Stars
+(2, 12),    -- Faded
+(2, 16),    -- Hymn for the Weekend
+(2, 20),    -- Save Your Tears
+
+-- 3. Fiesta Total
+(3, 3),     -- Yo Perreo Sola
+(3, 7),     -- ON
+(3, 11),    -- Billie Jean
+(3, 13),    -- Safaera
+(3, 14),    -- Radioactive
+
+-- 4. Clásicos Eternos
+(4, 8),     -- Bohemian Rhapsody
+(4, 9),     -- Master of Puppets
+(4, 15),    -- La Tortura
+(4, 17),    -- Black Swan
+(4, 18);    -- Love of My Life
 
 CREATE TABLE musica.canciones(
     song_id SERIAL PRIMARY KEY,
