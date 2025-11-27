@@ -220,3 +220,129 @@ INSERT INTO musica.canciones(song_name, duration, date_creation, reproduction, l
 ('Love of My Life', 217, '1975-11-21', 500000000, 18, 2, 8, 8),
 ('Battery', 312, '1986-03-03', 450000000, 19, 10, 9, 9),
 ('Save Your Tears', 215, '2020-03-20', 1500000000, 20, 5, 10, 10);
+
+-- 1. BÚSQUEDA POR NOMBRE DE CANCIÓN
+SELECT 
+    c.song_id,
+    c.song_name,
+    c.duration,
+    c.date_creation,
+    c.reproduction,
+    a.name_artist,
+    g.gender,
+    alb.title AS album_name,
+    l.content AS lyrics_content,
+    l.lenguage,
+    l.version
+FROM musica.canciones c
+INNER JOIN musica.artistas a ON c.artist_id = a.artist_id
+INNER JOIN musica.generos g ON c.gender_id = g.gender_id
+INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
+INNER JOIN musica.lyrics l ON c.lyrics_id = l.lyrics_id
+WHERE LOWER(c.song_name) LIKE LOWER('%Thriller%')
+ORDER BY c.song_id;
+
+-- 2. BÚSQUEDA POR NOMBRE DE ARTISTA
+SELECT 
+    c.song_id,
+    c.song_name,
+    c.duration,
+    c.date_creation,
+    c.reproduction,
+    a.name_artist,
+    g.gender,
+    alb.title AS album_name,
+    l.content AS lyrics_content,
+    l.lenguage,
+    l.version
+FROM musica.canciones c
+INNER JOIN musica.artistas a ON c.artist_id = a.artist_id
+INNER JOIN musica.generos g ON c.gender_id = g.gender_id
+INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
+INNER JOIN musica.lyrics l ON c.lyrics_id = l.lyrics_id
+WHERE LOWER(a.name_artist) LIKE LOWER('%Bad Bunny%')
+ORDER BY c.song_id;
+
+-- 3. BÚSQUEDA POR GÉNERO
+SELECT 
+    c.song_id,
+    c.song_name,
+    c.duration,
+    c.date_creation,
+    c.reproduction,
+    a.name_artist,
+    g.gender,
+    alb.title AS album_name,
+    l.content AS lyrics_content,
+    l.lenguage,
+    l.version
+FROM musica.canciones c
+INNER JOIN musica.artistas a ON c.artist_id = a.artist_id
+INNER JOIN musica.generos g ON c.gender_id = g.gender_id
+INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
+INNER JOIN musica.lyrics l ON c.lyrics_id = l.lyrics_id
+WHERE LOWER(g.gender) LIKE LOWER('%Rock%')
+ORDER BY c.song_id;
+
+-- 4. BÚSQUEDA POR NOMBRE DE ÁLBUM
+SELECT 
+    c.song_id,
+    c.song_name,
+    c.duration,
+    c.date_creation,
+    c.reproduction,
+    a.name_artist,
+    g.gender,
+    alb.title AS album_name,
+    l.content AS lyrics_content,
+    l.lenguage,
+    l.version
+FROM musica.canciones c
+INNER JOIN musica.artistas a ON c.artist_id = a.artist_id
+INNER JOIN musica.generos g ON c.gender_id = g.gender_id
+INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
+INNER JOIN musica.lyrics l ON c.lyrics_id = l.lyrics_id
+WHERE LOWER(alb.title) LIKE LOWER('%Master%')
+ORDER BY c.song_id;
+
+-- 5. BÚSQUEDA POR LENGUAJE DE LETRA
+SELECT 
+    c.song_id,
+    c.song_name,
+    c.duration,
+    c.date_creation,
+    c.reproduction,
+    a.name_artist,
+    g.gender,
+    alb.title AS album_name,
+    l.content AS lyrics_content,
+    l.lenguage,
+    l.version
+FROM musica.canciones c
+INNER JOIN musica.artistas a ON c.artist_id = a.artist_id
+INNER JOIN musica.generos g ON c.gender_id = g.gender_id
+INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
+INNER JOIN musica.lyrics l ON c.lyrics_id = l.lyrics_id
+WHERE LOWER(l.lenguage) LIKE LOWER('%English%')
+ORDER BY c.song_id;
+
+-- 6. BÚSQUEDA POR LETRA DE CANCIÓN (APROXIMADA - SIMILAR TO)
+SELECT 
+    c.song_id,
+    c.song_name,
+    c.duration,
+    c.date_creation,
+    c.reproduction,
+    a.name_artist,
+    g.gender,
+    alb.title AS album_name,
+    l.content AS lyrics_content,
+    l.lenguage,
+    l.version
+FROM musica.canciones c
+INNER JOIN musica.artistas a ON c.artist_id = a.artist_id
+INNER JOIN musica.generos g ON c.gender_id = g.gender_id
+INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
+INNER JOIN musica.lyrics l ON c.lyrics_id = l.lyrics_id
+WHERE l.content ILIKE '%love%' OR l.content ILIKE '%dance%' OR l.content ILIKE '%night%'
+ORDER BY c.song_id;
