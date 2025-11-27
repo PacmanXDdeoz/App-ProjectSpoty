@@ -101,6 +101,7 @@ CREATE TABLE musica.lyrics(
     version TEXT NOT NULL
 );
 
+INSERT INTO musica.lyrics(content, lenguage, version) VALUES
 ('Cause this is thriller, thriller night...', 'English', 'Original'),
 ('We live, we love, we lie...', 'English', 'Original'),
 ('Yo perreo sola, sin que me estén molestando...', 'Español', 'Original'),
@@ -110,9 +111,7 @@ CREATE TABLE musica.lyrics(
 ('I wanna know your name, and I wanna know your heart...', 'Korean/English', 'Original'),
 ('Is this the real life? Is this just fantasy?', 'English', 'Original'),
 ('Taste me you will see, more is all you need...', 'English', 'Original'),
-('I can’t escape this now, unless you show me how...', 'English', 'Remix');
-
-INSERT INTO musica.lyrics(content, lenguage, version) VALUES 
+('I can’t escape this now, unless you show me how...', 'English', 'Remix'), 
 ('Billie Jean is not my lover, she''s just a girl who claims that I am the one...', 'English', 'Original'),
 ('Where are you now? Was it all in my fantasy?...', 'English', 'Original'),
 ('Si tu novio no te mama el culo, pa’ eso que no mame...', 'Español', 'Explicit'),
@@ -153,3 +152,23 @@ CREATE TABLE musica.canciones(
 );
 
 INSERT INTO musica.canciones(song_name, duration, date_creation, reproduction, lyrics_id, gender_id, artist_id, album_id) VALUES 
+('Thriller', 358, '1982-10-01', 800000000, 1, 1, 1, 1),
+('The Spectre', 213, '2017-09-15', 650000000, 2, 5, 2, 2),
+('Yo Perreo Sola', 176, '2020-02-29', 550000000, 3, 3, 3, 3),
+('Demons', 177, '2012-09-04', 950000000, 4, 2, 4, 4),
+('Tortura de Amor', 205, '2005-06-03', 200000000, 5, 1, 5, 5),
+('A Sky Full of Stars', 262, '2014-05-19', 700000000, 6, 1, 6, 6),
+('ON', 275, '2020-02-21', 900000000, 7, 4, 7, 7),
+('Bohemian Rhapsody', 354, '1975-11-21', 1500000000, 8, 2, 8, 8),
+('Master of Puppets', 515, '1986-03-03', 1100000000, 9, 10, 9, 9),
+('Blinding Lights', 200, '2020-03-20', 2000000000, 10, 5, 10, 10),
+('Billie Jean', 294, '1982-10-01', 500000000, 11, 1, 1, 1),
+('Faded', 212, '2015-12-03', 900000000, 12, 5, 2, 2),
+('Safaera', 236, '2020-02-29', 900000000, 13, 3, 3, 3),
+('Radioactive', 186, '2012-09-04', 1200000000, 14, 2, 4, 4),
+('La Tortura', 212, '2005-06-03', 800000000, 15, 1, 5, 5),
+('Hymn for the Weekend', 258, '2015-12-04', 1200000000, 16, 1, 6, 6),
+('Black Swan', 199, '2020-02-21', 600000000, 17, 4, 7, 7),
+('Love of My Life', 217, '1975-11-21', 500000000, 18, 2, 8, 8),
+('Battery', 312, '1986-03-03', 450000000, 19, 10, 9, 9),
+('Save Your Tears', 215, '2020-03-20', 1500000000, 20, 5, 10, 10);
