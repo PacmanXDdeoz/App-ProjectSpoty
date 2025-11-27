@@ -1,10 +1,12 @@
 import java.sql.*;
 import Config.Con;
+import UI.Menu;
+
 
 public class App {
     public static void main(String[] args) {
         //* Menus */
-
+        Menu.mostrarMenuPrincipal();
         //* Conexión a la base de datos */
         Con con = null;
         Connection connection = null;
