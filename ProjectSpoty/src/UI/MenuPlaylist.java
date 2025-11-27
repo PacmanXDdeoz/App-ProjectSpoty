@@ -11,7 +11,9 @@ public class MenuPlaylist {
             System.out.println("----- Buscar Playlist -----");
             System.out.println("1. Ver Playlist");
             System.out.println("2. Buscar Playlist");
-            System.out.println("3. Volver al Menú Principal");
+            System.out.println("3. Crear Playlist");
+            System.out.println("4. Eliminar Playlist");
+            System.out.println("0. Volver al Menú Principal");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
             opcion = sc.nextInt();
@@ -33,7 +35,18 @@ public class MenuPlaylist {
                         GeneralService.cleanScreen();
                         break;
                     case 3:
-                        Menu.mostrarMenuPrincipal();
+                        GeneralService.cleanScreen();
+                        GeneralService.showLoading();
+                        GeneralService.cleanScreen();
+                        // crearPlaylist();
+                        GeneralService.cleanScreen();
+                        break;
+                    case 4:
+                        GeneralService.cleanScreen();
+                        GeneralService.showLoading();
+                        GeneralService.cleanScreen();
+                        // eliminarPlaylist();
+                        GeneralService.cleanScreen();
                         break;
                     default:
                         System.out.println("Opción inválida");

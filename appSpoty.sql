@@ -346,3 +346,53 @@ INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
 INNER JOIN musica.lyrics l ON c.lyrics_id = l.lyrics_id
 WHERE l.content ILIKE '%love%' OR l.content ILIKE '%dance%' OR l.content ILIKE '%night%'
 ORDER BY c.song_id;
+
+-- ============================================
+-- OPERACIONES CRUD PARA PLAYLIST
+-- ============================================
+
+-- 1. ACTUALIZAR PLAYLIST (nombre y descripción)
+UPDATE musica.playlist 
+SET 
+    name_playlist = 'Nuevo Nombre de Playlist',
+    description = 'Nueva descripción de la playlist'
+WHERE playlist_id = 1;
+
+-- 2. ELIMINAR PLAYLIST (también elimina las canciones asociadas por foreign key cascade)
+DELETE FROM musica.playlist 
+WHERE playlist_id = 1;
+
+-- ============================================
+-- OPERACIONES PARA AGREGAR Y ELIMINAR CANCIONES EN PLAYLIST
+-- ============================================
+
+-- 3. AGREGAR UNA CANCIÓN A LA PLAYLIST
+INSERT INTO musica.playlist_songs (playlist_id, song_id) 
+VALUES (1, 5);
+
+-- 4. ELIMINAR UNA CANCIÓN DE LA PLAYLIST
+DELETE FROM musica.playlist_songs 
+WHERE playlist_id = 1 AND song_id = 5;
+
+-- 5. ELIMINAR TODAS LAS CANCIONES DE UNA PLAYLIST
+DELETE FROM musica.playlist_songs 
+WHERE playlist_id = 1;
+
+-- 6. VER TODAS LAS CANCIONES DE UNA PLAYLIST
+SELECT 
+    ps.playlist_song_id,
+    p.name_playlist,
+    c.song_id,
+    c.song_name,
+    c.duration,
+    a.name_artist,
+    g.gender,
+    alb.title AS album_name
+FROM musica.playlist_songs ps
+INNER JOIN musica.playlist p ON ps.playlist_id = p.playlist_id
+INNER JOIN musica.canciones c ON ps.song_id = c.song_id
+INNER JOIN musica.artistas a ON c.artist_id = a.artist_id
+INNER JOIN musica.generos g ON c.gender_id = g.gender_id
+INNER JOIN musica.albumes alb ON c.album_id = alb.album_id
+WHERE p.playlist_id = 1
+ORDER BY ps.playlist_song_id;
