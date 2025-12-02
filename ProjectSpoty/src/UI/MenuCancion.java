@@ -15,7 +15,7 @@ public class MenuCancion {
             System.out.println("----- Buscar Canciones -----");
             System.out.println("1. Ver Canciones");
             System.out.println("2. Buscar Canciones");
-            System.out.println("3. Volver al Menú Principal");
+            System.out.println("0. Volver al Menú Principal");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
             opcion = sc.nextInt();
@@ -36,7 +36,7 @@ public class MenuCancion {
                         buscarCanciones(sc);
                         GeneralService.cleanScreen();
                         break;
-                    case 3:
+                    case 0:
                         GeneralService.cleanScreen();
                         return;
                     default:
