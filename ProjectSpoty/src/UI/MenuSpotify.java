@@ -6,18 +6,19 @@ import UI.MenuAlbumes;
 import UI.MenuArtistas;
 import UI.MenuCancion;
 import UI.MenuPlaylist;
+import Model.Users;
 
 public class MenuSpotify {
-    public static void spotify() {
+    public static void spotify(Users currentUser) {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         do {
-            System.out.println("----- Menu Spotify -----");
+            System.out.println("----- Menu Spotify " + currentUser.getName() + " -----");
             System.out.println("1. Buscar Artista");
             System.out.println("2. Buscar Álbum");
             System.out.println("3. Buscar Canción");
             System.out.println("4. Buscar Playlist");
-            System.out.println("5. Cerrar Sesión");
+            System.out.println("0. Cerrar Sesión");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
             opcion = sc.nextInt();
@@ -49,16 +50,15 @@ public class MenuSpotify {
                         GeneralService.cleanScreen();
                         GeneralService.showLoading();
                         GeneralService.cleanScreen();
-                        MenuPlaylist.playlist();
+                        MenuPlaylist.playlist(currentUser);
                         GeneralService.cleanScreen();
                         break;
-                    case 5:
+                    case 0:
+                        GeneralService.cleanScreen();
                         System.out.println("¡Hasta pronto!");
-                        System.exit(0);
-                        break;
+                        return;
                     default:
                         System.out.println("Opción inválida");
-                        spotify();
                 }
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());

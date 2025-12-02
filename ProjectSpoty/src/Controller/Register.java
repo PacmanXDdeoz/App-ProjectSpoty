@@ -7,42 +7,40 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class Register {
-        
-    public static Users register(Scanner sc) {
-        System.out.print("Ingresa tu nombre/nombres: ");
-        String name = sc.nextLine();
+    public Register() {
+    }
 
-        System.out.print("Ingresa tu correo: ");
-        String email = sc.nextLine();
+    /**
+     * Registra un nuevo usuario en la base de datos
+     * @param connection Conexión a la base de datos
+     * @param name Nombre del usuario
+     * @param email Email del usuario
+     * @param password Contraseña del usuario
+     * @return Usuario registrado con ID generado, o null si falla
+     */
+    public static Users register(Connection connection, String name, String email, String password) {
+        // Use the actual schema/table and column names from `appSpoty.sql` (musica.usuarios)
+        String sql = "INSERT INTO musica.usuarios(user_name, email, password) VALUES (?, ?, ?) RETURNING user_id";
+        Users user = null;
 
-        System.out.print("Ingresa tu contraseña: ");
-        String password = sc.nextLine();
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, password);
 
-        Connection connection = null;
-        try {
-            connection = Con.getConn();
-            String sql = "INSERT INTO users(name, email, password) VALUES (?, ?, ?) RETURNING id";
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, name);
-                ps.setString(2, email);
-                ps.setString(3, password);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        int id = rs.getInt(1);
-                        Users user = new Users(id, name, email, password);
-                        System.out.println("Usuario registrado con id: " + id);
-                        return user;
-                    }
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int userId = rs.getInt("user_id");
+                    user = new Users(userId, name, email, password);
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al insertar en la base de datos: " + e.getMessage());
-        } finally {
-            Con.closeConnetion(connection);
+            System.out.println("Error al registrar usuario: " + e.getMessage());
+            e.printStackTrace();
         }
-        return null;
+
+        return user;
     }
 }

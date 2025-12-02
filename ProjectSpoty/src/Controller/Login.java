@@ -27,7 +27,7 @@ public class Login {
             if (resultSet.next()) {                
                 users = new Users();
                 users.setUser_id(resultSet.getInt("user_id"));
-                users.setName(resultSet.getString("name"));
+                users.setName(resultSet.getString("user_name"));
                 users.setEmail(resultSet.getString("email"));
                 users.setPassword(resultSet.getString("password"));
 

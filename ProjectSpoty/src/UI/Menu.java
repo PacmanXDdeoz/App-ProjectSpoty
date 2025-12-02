@@ -1,10 +1,10 @@
 package UI;
 
 import Controller.Login;
+import Controller.Register;
 import Config.Con;
 import Model.Users;
 
-import java.lang.ModuleLayer.Controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -16,19 +16,19 @@ public class Menu {
     public static void mostrarMenuPrincipal() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("=============================");
-        System.out.println("    SPOTIFY - BIENVENIDO");
-        System.out.println("=============================");
-        System.out.println("1. Iniciar Sesión");
-        System.out.println("2. Registrarse");
-        System.out.println("3. Salir");
-        System.out.print("Elige una opción: ");
-        System.out.println("-------------------------");
-
-        int opcion = sc.nextInt();
-        sc.nextLine();
         while (true) {
             try {
+                System.out.println("=============================");
+                System.out.println("    SPOTIFY - BIENVENIDO");
+                System.out.println("=============================");
+                System.out.println("1. Iniciar Sesión");
+                System.out.println("2. Registrarse");
+                System.out.println("0. Salir");
+                System.out.print("Elige una opción: ");
+                System.out.println("-------------------------");
+
+                int opcion = sc.nextInt();
+                sc.nextLine();
 
                 switch (opcion) {
                     case 1:
@@ -38,22 +38,21 @@ public class Menu {
                         Users logged = iniciarSesion(sc);
                         if (logged != null) {
                             GeneralService.cleanScreen();
-                            MenuSpotify.spotify();
+                            MenuSpotify.spotify(logged);
                         }
                         break;
                     case 2:
                         GeneralService.cleanScreen();
                         GeneralService.showLoading();
                         GeneralService.cleanScreen();
-                        // Controller.Register();
+                        registrarse(sc);
                         GeneralService.cleanScreen();
                         break;
-                    case 3:
+                    case 0:
                         System.out.println("¡Adiós!");
                         System.exit(0);
                     default:
                         System.out.println("Opción inválida");
-                        mostrarMenuPrincipal();
                 }
             } catch (Exception e) {
                 System.err.println("Error: " + e.getMessage());
@@ -86,5 +85,32 @@ public class Menu {
             Con.closeConnetion(connection);
         }
         return usuarioActual;
+    }
+
+    public static void registrarse(Scanner sc) {
+        GeneralService.cleanScreen();
+        System.out.println("▶ REGISTRARSE ◀");
+        System.out.print("Ingresa tu nombre: ");
+        String name = sc.nextLine();
+        System.out.print("Ingresa tu correo: ");
+        String email = sc.nextLine();
+        System.out.print("Ingresa tu contraseña: ");
+        String password = sc.nextLine();
+
+        Connection connection = null;
+        try {
+            connection = Con.getConn();
+            Users nuevoUsuario = Register.register(connection, name, email, password);
+            if (nuevoUsuario != null) {
+                System.out.println("✓ ¡Registro exitoso! Bienvenido " + name);
+            } else {
+                System.out.println("✗ Error al registrar el usuario");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al registrar: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            Con.closeConnetion(connection);
+        }
     }
 }

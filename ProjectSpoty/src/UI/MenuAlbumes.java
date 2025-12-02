@@ -1,6 +1,8 @@
 package UI;
 
 import java.util.Scanner;
+
+import Config.Con;
 import Service.GeneralService;
 import Repository.ConsultaAlbumes;
 
@@ -12,7 +14,7 @@ public class MenuAlbumes {
             System.out.println("----- Buscar Albumes -----");
             System.out.println("1. Ver Albumes");
             System.out.println("2. Buscar Albumes");
-            System.out.println("3. Volver al Menú Principal");
+            System.out.println("0. Volver al Menú Principal");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
             opcion = sc.nextInt();
@@ -23,7 +25,25 @@ public class MenuAlbumes {
                         GeneralService.cleanScreen();
                         GeneralService.showLoading();
                         GeneralService.cleanScreen();
-                        ConsultaAlbumes.listarTodos(null);
+                        var todos = ConsultaAlbumes.listarTodos(null);
+                        if (todos != null && !todos.isEmpty()) {
+                            for (var album : todos) {
+                                System.out.println("Título: " + album.get("title"));
+                                System.out.println("Fecha de lanzamiento: " + album.get("date_release"));
+                                System.out.println("Cantidad de canciones: " + album.get("count_songs"));
+                                // mostrar nombre del artista si está disponible
+                                if (album.get("artist_name") != null) {
+                                    System.out.println("Artista: " + album.get("artist_name"));
+                                } else {
+                                    System.out.println("ID del artista: " + album.get("artist_id"));
+                                }
+                                System.out.println("---");
+                            }
+                            sc.nextLine();
+                        } else {
+                            System.out.println("No hay álbumes para mostrar.");
+                            sc.nextLine();
+                        }
                         GeneralService.cleanScreen();
                         break;
                     case 2:
@@ -33,12 +53,11 @@ public class MenuAlbumes {
                         buscarAlbumes();
                         GeneralService.cleanScreen();
                         break;
-                    case 3:
-                        Menu.mostrarMenuPrincipal();
-                        break;
+                    case 0:
+                        GeneralService.cleanScreen();
+                        return;
                     default:
                         System.out.println("Opción inválida");
-                        albumes();
                 }
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
@@ -54,7 +73,7 @@ public class MenuAlbumes {
             System.out.println("----- Buscar -----");
             System.out.println("1. Buscar por título");
             System.out.println("2. Buscar por artista");
-            System.out.println("3. Regresar");
+            System.out.println("0. Volver al Menú Principal");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
             opcion = sc.nextInt();
@@ -78,7 +97,9 @@ public class MenuAlbumes {
                             }
                         } else {
                             System.out.println("No se encontraron álbumes.");
+                            sc.nextLine();
                         }
+                        sc.nextLine();
                         GeneralService.cleanScreen();
                         break;
                     case 2:
@@ -97,14 +118,14 @@ public class MenuAlbumes {
                                 System.out.println("---");
                             }
                         }
+                        sc.nextLine();
                         GeneralService.cleanScreen();
                         break;
-                    case 3:
-                        albumes();
-                        break;
+                    case 0:
+                        GeneralService.cleanScreen();
+                        return;
                     default:
                         System.out.println("Opción inválida");
-                        albumes();
                 }
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
