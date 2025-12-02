@@ -11,7 +11,6 @@ import java.util.Scanner;
 import Service.GeneralService;
 import UI.MenuSpotify;
 
-
 public class Menu {
 
     public static void mostrarMenuPrincipal() {
@@ -63,7 +62,7 @@ public class Menu {
         }
     }
 
-    public static Users iniciarSesion(Scanner sc){
+    public static Users iniciarSesion(Scanner sc) {
         GeneralService.cleanScreen();
         System.out.println("▶ INICIAR SESIÓN ◀");
         System.out.print("Ingresa tu correo: ");
