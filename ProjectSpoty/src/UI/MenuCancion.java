@@ -52,13 +52,13 @@ public class MenuCancion {
         int opcion = 0;
         do {
             System.out.println("----- Buscar -----");
-            System.out.println("1. Buscar por título");
+            System.out.println("1. Buscar por su id de canción");
             System.out.println("2. Regresar");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
             opcion = sc.nextInt();
             sc.nextLine();
-            try {
+            try{
                 switch (opcion) {
                     case 1:
                         GeneralService.cleanScreen();
@@ -72,6 +72,7 @@ public class MenuCancion {
                         break;
                     default:
                         System.out.println("Opción inválida");
+                        buscarCanciones();
                 }
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());

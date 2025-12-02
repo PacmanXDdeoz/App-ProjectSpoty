@@ -70,7 +70,7 @@ public class MenuPlaylist {
         int opcion = 0;
         do {
             System.out.println("----- Buscar -----");
-            System.out.println("1. Buscar por su id");
+            System.out.println("1. Buscar la playlist por su id");
             System.out.println("2. Regresar");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
