@@ -2,6 +2,7 @@ package UI;
 
 import java.util.Scanner;
 import Service.GeneralService;
+import Repository.ConsultaPlaylists;
 
 public class MenuPlaylist {
     public static void playlist() {
@@ -24,7 +25,7 @@ public class MenuPlaylist {
                         GeneralService.cleanScreen();
                         GeneralService.showLoading();
                         GeneralService.cleanScreen();
-                        // verPlaylist();
+                        ConsultaPlaylists.listarPlaylists(null);
                         GeneralService.cleanScreen();
                         break;
                     case 2:

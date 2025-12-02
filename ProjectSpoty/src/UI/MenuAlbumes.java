@@ -1,8 +1,6 @@
 package UI;
 
 import java.util.Scanner;
-
-import Config.Con;
 import Service.GeneralService;
 import Repository.ConsultaAlbumes;
 
@@ -56,7 +54,7 @@ public class MenuAlbumes {
             System.out.println("----- Buscar -----");
             System.out.println("1. Buscar por título");
             System.out.println("2. Buscar por artista");
-            System.out.println("3. Volver al Menú Principal");
+            System.out.println("3. Regresar");
             System.out.print("Elige una opción: ");
             System.out.println("-------------------------");
             opcion = sc.nextInt();
@@ -102,7 +100,7 @@ public class MenuAlbumes {
                         GeneralService.cleanScreen();
                         break;
                     case 3:
-                        Menu.mostrarMenuPrincipal();
+                        albumes();
                         break;
                     default:
                         System.out.println("Opción inválida");
