@@ -13,17 +13,18 @@ public class MenuSpotify {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         do {
-            System.out.println("----- Menu Spotify " + currentUser.getName() + " -----");
-            System.out.println("1. Buscar Artista");
-            System.out.println("2. Buscar Álbum");
-            System.out.println("3. Buscar Canción");
-            System.out.println("4. Buscar Playlist");
-            System.out.println("0. Cerrar Sesión");
-            System.out.print("Elige una opción: ");
-            System.out.println("-------------------------");
-            opcion = sc.nextInt();
-            sc.nextLine();
             try {
+            System.out.println("░░░░░░░░░░ Menu Spotify " + currentUser.getName() + " ░░░░░░░░░░");
+            System.out.println("        ⓵. Buscar Artista");
+            System.out.println("        ⓶. Buscar Álbum");
+            System.out.println("        ⓷. Buscar Canción");
+            System.out.println("        ⓸. Buscar Playlist");
+            System.out.println("        ⓹. Cerrar Sesión");
+            System.out.println("-----------------------------");
+            System.out.println("Elige una opción: ");
+            opcion = sc.nextInt();
+            System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
+            sc.nextLine();
                 switch (opcion) {
                     case 1:
                         GeneralService.cleanScreen();
@@ -53,11 +54,12 @@ public class MenuSpotify {
                         MenuPlaylist.playlist(currentUser);
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 5:
                         GeneralService.cleanScreen();
                         System.out.println("¡Hasta pronto!");
                         return;
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {

@@ -22,7 +22,7 @@ public class GeneralService {
     }
 
     public static void showLoading() {
-        String truck = "...💸  ";
+        String truck = "...🎶  ";
         int steps = 10; // Número de pasos en la animación
         int delay = 300; // Tiempo entre pasos en milisegundos
 

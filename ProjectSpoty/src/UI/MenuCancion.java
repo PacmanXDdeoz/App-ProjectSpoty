@@ -12,15 +12,16 @@ public class MenuCancion {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         do {
-            System.out.println("----- Buscar Canciones -----");
-            System.out.println("1. Ver Canciones");
-            System.out.println("2. Buscar Canciones");
-            System.out.println("0. Volver al Menú Principal");
-            System.out.print("Elige una opción: ");
-            System.out.println("-------------------------");
-            opcion = sc.nextInt();
-            sc.nextLine();
             try {
+            System.out.println("░░░░░░░░░░ Menu Canciones ░░░░░░░░░░");
+            System.out.println("        ⓵. Ver Canciones");
+            System.out.println("        ⓶. Buscar Canciones");
+            System.out.println("        ⓷. Volver al Menú Principal");
+            System.out.println("-----------------------------");
+            System.out.print("Elige una opción: ");
+            opcion = sc.nextInt();
+            System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
+            sc.nextLine();
                 switch (opcion) {
                     case 1:
                         GeneralService.cleanScreen();
@@ -36,10 +37,11 @@ public class MenuCancion {
                         buscarCanciones(sc);
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 3:
                         GeneralService.cleanScreen();
                         return;
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {
@@ -72,18 +74,19 @@ public class MenuCancion {
     public static void buscarCanciones(Scanner sc) {
         int opcion = 0;
         do {
-            System.out.println("----- Buscar Canciones -----");
-            System.out.println("1. Buscar por nombre");
-            System.out.println("2. Buscar por artista");
-            System.out.println("3. Buscar por género");
-            System.out.println("4. Buscar por álbum");
-            System.out.println("5. Buscar por lenguaje");
-            System.out.println("0. Volver");
-            System.out.print("Elige una opción: ");
-            System.out.println("-------------------------");
-            opcion = sc.nextInt();
-            sc.nextLine();
             try {
+            System.out.println("░░░░░░░░░░ Buscar Canciones ░░░░░░░░░░");
+            System.out.println("        ⓵. Buscar por nombre");
+            System.out.println("        ⓶. Buscar por artista");
+            System.out.println("        ⓷. Buscar por género");
+            System.out.println("        ⓸. Buscar por álbum");
+            System.out.println("        ⓹. Buscar por lenguaje");
+            System.out.println("        ⓺. Volver al Menú Principal");
+            System.out.println("-------------------------");
+            System.out.print("Elige una opción: ");
+            opcion = sc.nextInt();
+            System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
+            sc.nextLine();
                 switch (opcion) {
                     case 1:
                         GeneralService.cleanScreen();
@@ -135,10 +138,11 @@ public class MenuCancion {
                         mostrarCanciones(resultados5);
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 6:
                         GeneralService.cleanScreen();
                         return;
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {
@@ -152,6 +156,7 @@ public class MenuCancion {
         Scanner sc = new Scanner(System.in);
         if (resultados != null && !resultados.isEmpty()) {
             for (var cancion : resultados) {
+                System.out.println("░░░░░░░░░░ Canción ░░░░░░░░░░");
                 System.out.println("Nombre: " + cancion.get("song_name"));
                 System.out.println("Artista: " + cancion.get("name_artist"));
                 System.out.println("Género: " + cancion.get("gender"));

@@ -13,16 +13,17 @@ public class MenuPlaylist {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         do {
-            System.out.println("----- Buscar Playlist -----");
-            System.out.println("1. Ver Mis Playlists");
-            System.out.println("2. Ver Todas las Playlists");
-            System.out.println("3. Crear Playlist");
-            System.out.println("0. Volver al Menú Principal");
-            System.out.print("Elige una opción: ");
-            System.out.println("-------------------------");
-            opcion = sc.nextInt();
-            sc.nextLine();
             try {
+            System.out.println("░░░░░░░░░░ Menu Playlist " + currentUser.getName() + " ░░░░░░░░░░");
+            System.out.println("        ⓵. Ver Mis Playlists");
+            System.out.println("        ⓶. Ver Todas las Playlists");
+            System.out.println("        ⓷. Crear Playlist");
+            System.out.println("        ⓸. Volver al Menú Principal");
+            System.out.println("-----------------------------");
+            System.out.print("Elige una opción: ");
+            opcion = sc.nextInt();
+            System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
+            sc.nextLine();
                 switch (opcion) {
                     case 1:
                         GeneralService.cleanScreen();
@@ -45,10 +46,11 @@ public class MenuPlaylist {
                         crearPlaylist(currentUser, sc);
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 4:
                         GeneralService.cleanScreen();
                         return;
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {

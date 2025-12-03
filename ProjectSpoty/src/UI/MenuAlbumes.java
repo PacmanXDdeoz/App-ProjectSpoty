@@ -11,15 +11,16 @@ public class MenuAlbumes {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         do {
-            System.out.println("----- Buscar Albumes -----");
-            System.out.println("1. Ver Albumes");
-            System.out.println("2. Buscar Albumes");
-            System.out.println("0. Volver al Menú Principal");
-            System.out.print("Elige una opción: ");
-            System.out.println("-------------------------");
-            opcion = sc.nextInt();
-            sc.nextLine();
             try {
+            System.out.println("░░░░░░░░░░ Menu Albumes ░░░░░░░░░░");
+            System.out.println("        ⓵. Ver Albumes");
+            System.out.println("        ⓶. Buscar Albumes");
+            System.out.println("        ⓷. Volver al Menú Principal");
+            System.out.println("-------------------------");
+            System.out.print("Elige una opción: ");
+            opcion = sc.nextInt();
+            System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
+            sc.nextLine();
                 switch (opcion) {
                     case 1:
                         GeneralService.cleanScreen();
@@ -53,10 +54,11 @@ public class MenuAlbumes {
                         buscarAlbumes();
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 3:
                         GeneralService.cleanScreen();
                         return;
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {
@@ -70,15 +72,16 @@ public class MenuAlbumes {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         do {
-            System.out.println("----- Buscar -----");
-            System.out.println("1. Buscar por título");
-            System.out.println("2. Buscar por artista");
-            System.out.println("0. Volver al Menú Principal");
-            System.out.print("Elige una opción: ");
-            System.out.println("-------------------------");
-            opcion = sc.nextInt();
-            sc.nextLine();
             try {
+            System.out.println("░░░░░░░░░░ Buscar Albumes ░░░░░░░░░░");
+            System.out.println("        ⓵. Buscar por título");
+            System.out.println("        ⓶. Buscar por artista");
+            System.out.println("        ⓷. Volver al Menú Principal");
+            System.out.println("-------------------------");
+            System.out.print("Elige una opción: ");
+            opcion = sc.nextInt();
+            System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
+            sc.nextLine();
                 switch (opcion) {
                     case 1:
                         GeneralService.cleanScreen();
@@ -121,10 +124,11 @@ public class MenuAlbumes {
                         sc.nextLine();
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 3:
                         GeneralService.cleanScreen();
                         return;
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {

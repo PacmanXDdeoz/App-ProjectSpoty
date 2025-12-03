@@ -10,13 +10,14 @@ public class MenuArtistas {
         int opcion = 0;
         do {
             try {
-                System.out.println("----- Buscar Artista -----");
-                System.out.println("1. Ver Artistas");
-                System.out.println("2. Buscar Artista");
-                System.out.println("0. Volver al Menú Principal");
+                System.out.println("░░░░░░░░░░ Menu Artistas ░░░░░░░░░░");
+                System.out.println("        ⓵. Ver Artistas");
+                System.out.println("        ⓶. Buscar Artista");
+                System.out.println("        ⓷. Volver al Menú Principal");
+                System.out.println("-----------------------------");
                 System.out.print("Elige una opción: ");
-                System.out.println("-------------------------");
                 opcion = sc.nextInt();
+                System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
                 sc.nextLine();
                 switch (opcion) {
                     case 1:
@@ -63,10 +64,11 @@ public class MenuArtistas {
                         sc.nextLine();
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 3:
                         GeneralService.cleanScreen();
                         return;
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {

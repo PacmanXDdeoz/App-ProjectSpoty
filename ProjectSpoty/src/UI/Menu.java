@@ -21,13 +21,14 @@ public class Menu {
                 System.out.println("=============================");
                 System.out.println("    SPOTIFY - BIENVENIDO");
                 System.out.println("=============================");
-                System.out.println("1. Iniciar Sesión");
-                System.out.println("2. Registrarse");
-                System.out.println("0. Salir");
+                System.out.println("      ⓵. Iniciar Sesión");
+                System.out.println("      ⓶. Registrarse");
+                System.out.println("      ⓷. Salir");
+                System.out.println("-----------------------------");
                 System.out.print("Elige una opción: ");
-                System.out.println("-------------------------");
-
                 int opcion = sc.nextInt();
+                System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
+
                 sc.nextLine();
 
                 switch (opcion) {
@@ -48,10 +49,11 @@ public class Menu {
                         registrarse(sc);
                         GeneralService.cleanScreen();
                         break;
-                    case 0:
+                    case 3:
                         System.out.println("¡Adiós!");
                         System.exit(0);
                     default:
+                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {
