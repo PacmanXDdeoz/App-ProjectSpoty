@@ -140,4 +140,85 @@ public class ConsultaPlaylists {
         return lista;
     }
 
+    /**
+     * Agrega una canción a una playlist.
+     * Retorna true si la inserción fue exitosa, false en caso contrario.
+     */
+    public static boolean agregarCancionAPlaylist(Connection connection, int playlistId, int songId) {
+        PreparedStatement ps = null;
+        try {
+            connection = Con.getConn();
+            String sql = "INSERT INTO musica.playlist_songs (playlist_id, song_id) VALUES (?, ?)";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, playlistId);
+            ps.setInt(2, songId);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al agregar canción a playlist: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) ps.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Lista las canciones asociadas a una playlist por su id.
+     * Retorna una lista de Maps con keys: playlist_song_id, name_playlist, song_id, song_name, duration, name_artist, gender, album_name
+     */
+    public static List<Map<String, Object>> listarCancionesDePlaylist(Connection connection, int playlistId) {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        List<Map<String, Object>> lista = new ArrayList<>();
+
+        try {
+            connection = Con.getConn();
+            String sql = "SELECT ps.playlist_song_id, p.name_playlist, c.song_id, c.song_name, c.duration, a.name_artist, g.gender, alb.title AS album_name "
+                    + "FROM musica.playlist_songs ps "
+                    + "INNER JOIN musica.playlist p ON ps.playlist_id = p.playlist_id "
+                    + "INNER JOIN musica.canciones c ON ps.song_id = c.song_id "
+                    + "INNER JOIN musica.artistas a ON c.artist_id = a.artist_id "
+                    + "INNER JOIN musica.generos g ON c.gender_id = g.gender_id "
+                    + "INNER JOIN musica.albumes alb ON c.album_id = alb.album_id "
+                    + "WHERE p.playlist_id = ? "
+                    + "ORDER BY ps.playlist_song_id";
+
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, playlistId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("playlist_song_id", rs.getInt("playlist_song_id"));
+                m.put("name_playlist", rs.getString("name_playlist"));
+                m.put("song_id", rs.getInt("song_id"));
+                m.put("song_name", rs.getString("song_name"));
+                m.put("duration", rs.getInt("duration"));
+                m.put("name_artist", rs.getString("name_artist"));
+                m.put("gender", rs.getString("gender"));
+                m.put("album_name", rs.getString("album_name"));
+                lista.add(m);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al listar canciones de playlist: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+
+        return lista;
+    }
+
 }

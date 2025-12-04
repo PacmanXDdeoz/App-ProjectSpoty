@@ -21,9 +21,7 @@ public class MenuSpotify {
             System.out.println("        ⓸. Buscar Playlist");
             System.out.println("        ⓹. Cerrar Sesión");
             System.out.println("-----------------------------");
-            System.out.println("Elige una opción: ");
             opcion = sc.nextInt();
-            System.out.println("▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃");
             sc.nextLine();
                 switch (opcion) {
                     case 1:
@@ -44,7 +42,7 @@ public class MenuSpotify {
                         GeneralService.cleanScreen();
                         GeneralService.showLoading();
                         GeneralService.cleanScreen();
-                        MenuCancion.cancion();
+                        MenuCancion.cancion(currentUser);
                         GeneralService.cleanScreen();
                         break;
                     case 4:
@@ -59,7 +57,6 @@ public class MenuSpotify {
                         System.out.println("¡Hasta pronto!");
                         return;
                     default:
-                        GeneralService.cleanScreen();
                         System.out.println("Opción inválida");
                 }
             } catch (Exception e) {
